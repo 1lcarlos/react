@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import './mapa.css';
 
 mapboxgl.accessToken =
-  'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
+  'pk.eyJ1IjoiMWxjYXJsb3MiLCJhIjoiY2tzeTFza2ttMmY0czJubGVrcThxcWxseiJ9.6oJv9K1rrz1IgUTMpLu6Uw';
 
 const Map = () => {
   const mapContainerRef = useRef(null);
@@ -16,10 +16,30 @@ const Map = () => {
   useEffect(() => {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: 'mapbox://styles/1lcarlos/cku36v4280dap17mkpb8bokcx',
       center: [lng, lat],
       zoom: zoom
     });
+
+    map.on('load', () => {
+        map.addSource('earthquakes', {
+        type: 'geojson',
+        // Use a URL for the value for the `data` property.
+        data: 'https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson'
+        });
+         
+        map.addLayer({
+        'id': 'earthquakes-layer',
+        'type': 'circle',
+        'source': 'earthquakes',
+        'paint': {
+        'circle-radius': 8,
+        'circle-stroke-width': 2,
+        'circle-color': 'red',
+        'circle-stroke-color': 'white'
+        }
+        });
+        });
 
     // Add navigation control (the +/- zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), 'top-right');

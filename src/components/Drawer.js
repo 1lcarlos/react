@@ -18,8 +18,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import { Grid, Button, Box } from '@material-ui/core';
-import logoDane from "../src/img/DANE__Geovisor__icon__logoDANE__01.svg";
-import logoObservatorio from "../src/img/Logo_Observatorio_inmobiliario_Opcion1.svg";
+// import logoDane from "../src/img/DANE__Geovisor__icon__logoDANE__01.svg";
+import logoDane from "../img/DANE__Geovisor__icon__logoDANE__01.svg";
+import logoObservatorio from "../img/Logo_Observatorio_inmobiliario_Opcion1.svg";
+// import logoObservatorio from "../src/img/Logo_Observatorio_inmobiliario_Opcion1.svg";
 import { AiOutlineDownload, AiOutlineFilter, AiOutlineQuestionCircle } from "react-icons/ai";
 import { FiLayers } from "react-icons/fi";
 import  ButtonGroup  from "@material-ui/core/ButtonGroup";
@@ -104,7 +106,7 @@ export default function PersistentDrawerLeft() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
-        color = "#ffff"
+        color = "primary"
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
@@ -112,7 +114,7 @@ export default function PersistentDrawerLeft() {
       >
         <Toolbar>
           <IconButton
-            color="default"
+            color="secondary"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"

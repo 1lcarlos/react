@@ -1,20 +1,20 @@
 import React from "react";
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from "./ui/theme";
 import Drawer from "./Drawer";
 import Mapa from './mapa';
 // import { ThemeProvider } from "@material-ui/core/styles";
 
 function App() {
   return (
-    <div className="App">
-      <Drawer/>
-      <div>
-          <Mapa/>
-      </div>
-      {/* <ThemeProvider theme={theme}>
-        
-      </ThemeProvider> */}
+    <ThemeProvider theme={theme}> 
       
-    </div>
+        <Drawer/>
+        <div>
+          <Mapa/>
+        </div>
+      
+    </ThemeProvider> 
   );
 }
 
