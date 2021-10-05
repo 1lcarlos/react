@@ -1,21 +1,26 @@
 import { createTheme } from '@material-ui/core/styles';
 
-const aguamarina = "#15e7e6de";
-const verdechillon = "#15e737de";
+const azul = "#0b72b9";
+const najanja = "#ffba60";
 
 const theme = createTheme({
     common: {
-        azul: `${aguamarina}`,
-        verde: `${verdechillon}`
+        azul: `${azul}`,
+        verde: `${najanja}`
     },
     palette: {
       primary: {
-        main: `${aguamarina}`,
+        main: `${azul}`,
       },
       secondary: {
-        main: `${verdechillon}`,
-      },
+        main: `${najanja}`,
+      }      
     },
+    typography:{
+      h3: {
+        fontWeight: 300
+      }  
+    }
   });
 
 export default theme;

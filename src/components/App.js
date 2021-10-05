@@ -1,6 +1,7 @@
 import React from "react";
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from "./ui/theme";
+import Header from "./ui/header1"
 import Drawer from "./Drawer";
 import Mapa from './mapa';
 // import { ThemeProvider } from "@material-ui/core/styles";
@@ -8,11 +9,13 @@ import Mapa from './mapa';
 function App() {
   return (
     <ThemeProvider theme={theme}> 
-      
-        <Drawer/>
+      <Header/>
+
+        hola mundo
+        {/* <Drawer/>
         <div>
           <Mapa/>
-        </div>
+        </div> */}
       
     </ThemeProvider> 
   );
