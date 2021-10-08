@@ -12,6 +12,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { Grid, Box } from '@material-ui/core';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 import logoDane from "../img/DANE__Geovisor__icon__logoDANE__01.svg";
 import logoObservatorio from "../img/Logo_Observatorio_inmobiliario_Opcion1.svg";
 import { AiOutlineDownload, AiOutlineFilter, AiOutlineQuestionCircle } from "react-icons/ai";
@@ -19,7 +22,6 @@ import { FiLayers } from "react-icons/fi";
 import { FaSearchLocation,
          FaFolderOpen,
          FaCog } from "react-icons/fa";
-
 
 const drawerWidth = 350;
 
@@ -30,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
   palette:{
       main: "#A2024D"
   },
-
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
@@ -64,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
     height:'.9em',
     color:'#666',
     padding: '0',
+    cursor: 'pointer',
     // webkitBackfaceVisbility: 'hidden',
      borderRadius:'100%',
     webkitTransition:'all 0.3s ease-in-out',
@@ -72,7 +74,18 @@ const useStyles = makeStyles((theme) => ({
       color: '#fff',
       boxShadow:' 0 0 0 10px #666'
      }
-},
+  },
+      modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    paper: {
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -124,6 +137,16 @@ export default function PersistentDrawerLeft() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const [openModal, setOpenModal] = React.useState(false);
+
+  const handleOpen = () => {
+    setOpenModal(true);
+  };
+
+  const handleClose = () => {
+    setOpenModal(false);
   };
 
   return (
@@ -208,7 +231,9 @@ export default function PersistentDrawerLeft() {
                 color = "error"
                     sm ={3}
                     className={classes.container}>
-                        <AiOutlineQuestionCircle className={classes.icono} fontSize = {25} />
+                        <AiOutlineQuestionCircle 
+                        onClick={handleOpen}
+                        className={classes.icono} fontSize = {25} />
                         <Typography className={classes.typography} paragraph>
                             Ayuda
                         </Typography>
@@ -240,6 +265,25 @@ export default function PersistentDrawerLeft() {
         <Typography variant="h6" noWrap>
             Filtro
         </Typography>
+        <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={openModal}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={openModal}>
+          <div className={classes.paper}>
+            <h2 id="transition-modal-title">Transition modal</h2>
+            <p id="transition-modal-description">react-transition-group animates me.</p>
+          </div>
+        </Fade>
+      </Modal>
             <Box padding = {5} ></Box>
             <Divider />
         <Typography variant="h6" noWrap>
