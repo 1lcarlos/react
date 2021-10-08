@@ -1,19 +1,19 @@
 import { createTheme } from '@material-ui/core/styles';
 
-const azul = "#0b72b9";
-const najanja = "#ffba60";
+const blanco = "#fff";
+const vinotinto = "#97034C";
 
 const theme = createTheme({
     common: {
-        azul: `${azul}`,
-        verde: `${najanja}`
+        blanco: `${blanco}`,
+        vinotinto: `${vinotinto}`
     },
     palette: {
       primary: {
-        main: `${azul}`,
+        main: `${blanco}`,
       },
       secondary: {
-        main: `${najanja}`,
+        main: `${vinotinto}`,
       }      
     },
     typography:{

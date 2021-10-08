@@ -5,26 +5,21 @@ import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import { Grid, Button, Box } from '@material-ui/core';
-// import logoDane from "../src/img/DANE__Geovisor__icon__logoDANE__01.svg";
+import { Grid, Box } from '@material-ui/core';
 import logoDane from "../img/DANE__Geovisor__icon__logoDANE__01.svg";
 import logoObservatorio from "../img/Logo_Observatorio_inmobiliario_Opcion1.svg";
-// import logoObservatorio from "../src/img/Logo_Observatorio_inmobiliario_Opcion1.svg";
 import { AiOutlineDownload, AiOutlineFilter, AiOutlineQuestionCircle } from "react-icons/ai";
 import { FiLayers } from "react-icons/fi";
-import  ButtonGroup  from "@material-ui/core/ButtonGroup";
+import { FaSearchLocation,
+         FaFolderOpen,
+         FaCog } from "react-icons/fa";
+
 
 const drawerWidth = 350;
 
@@ -50,6 +45,34 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+  logo: {
+      height:'3em'
+  },
+  container:{
+    display: 'initial',
+    textAlign: 'center',
+    position: 'relative',
+    padding: '8px 4px',
+  },
+  typography:{
+    fontSize: '.9em',
+    color:'#666',
+    marginTop:'.3em'
+  },
+  icono:{
+    background: 'transparent',
+    height:'.9em',
+    color:'#666',
+    padding: '0',
+    // webkitBackfaceVisbility: 'hidden',
+     borderRadius:'100%',
+    webkitTransition:'all 0.3s ease-in-out',
+    "&:hover": {
+      backgroundColor: '#666',
+      color: '#fff',
+      boxShadow:' 0 0 0 10px #666'
+     }
+},
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -59,9 +82,10 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
-  },
+    },
   drawerPaper: {
     width: drawerWidth,
+    // backgroundColor: '#f8f8f8',
   },
   drawerHeader: {
     display: 'flex',
@@ -140,10 +164,10 @@ export default function PersistentDrawerLeft() {
         <div className={classes.drawerHeader}>
           
           <Grid item xs={12} sm ={6}>
-            <img className={classes.logo} src= {logoDane} />
+            <img className={classes.logo} src= {logoDane} alt= 'logo_DANE' />
           </Grid>
           <Grid item xs={12} sm ={6}>
-             <img className={classes.logo} src= {logoObservatorio} />        
+             <img className={classes.logo} src= {logoObservatorio} alt= 'logo_Observatorio' />        
           </Grid>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
@@ -176,32 +200,38 @@ export default function PersistentDrawerLeft() {
         <Box padding = {2}>
 
         <Grid container 
+                    color = "error"
                     alignContent = "center"
                     alignItems = "center"
                     justifyContent ="space-between">
                 <Grid item  
-                    sm ={3}>
-                        <AiOutlineQuestionCircle fontSize = {25} />
-                        <Typography paragraph>
+                color = "error"
+                    sm ={3}
+                    className={classes.container}>
+                        <AiOutlineQuestionCircle className={classes.icono} fontSize = {25} />
+                        <Typography className={classes.typography} paragraph>
                             Ayuda
                         </Typography>
                 </Grid>
-                <Grid item sm ={3}>
-                        <AiOutlineFilter  fontSize = {25} />
-                        <Typography paragraph>
-                            Consulta
+                <Grid item sm ={3}
+                className={classes.container}>
+                        <FaSearchLocation className={classes.icono} fontSize = {25} />
+                        <Typography className={classes.typography} paragraph>
+                            Ubicación
                         </Typography>
                 </Grid>
-                <Grid item  sm ={3}>
-                        <FiLayers fontSize = {25} />
-                        <Typography paragraph>
-                            Mapa Base
+                <Grid item  sm ={3}
+                className={classes.container}>
+                        <FaFolderOpen className={classes.icono} fontSize = {25} />
+                        <Typography className={classes.typography} paragraph>
+                            Temas
                         </Typography>
                 </Grid>
-                <Grid item sm ={3}>
-                    <AiOutlineDownload fontSize = {25}/> 
-                    <Typography paragraph>
-                            Descarga
+                <Grid item sm ={3}
+                className={classes.container}>
+                    <FaCog className={classes.icono} fontSize = {25}/> 
+                    <Typography className={classes.typography} paragraph>
+                            Herramientas
                     </Typography>    
                 </Grid>
         </Grid>
@@ -214,59 +244,14 @@ export default function PersistentDrawerLeft() {
             <Divider />
         <Typography variant="h6" noWrap>
             Capas
-          </Typography>
-       
-        
-        
-        
-        
-        {/* <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List> */}
-        {/* <Divider /> */}
-        {/* <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List> */}
+          </Typography>       
       </Drawer>
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
-        <div className={classes.drawerHeader} />
-        {/* <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-          facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-          gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-          donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-          Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-          imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-          arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-          donec massa sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-          facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-          tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-          consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-          vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-          hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-          tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-          nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-          accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography> */}
+        
       </main>
     </div>
   );

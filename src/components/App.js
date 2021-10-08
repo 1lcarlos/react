@@ -9,13 +9,13 @@ import Mapa from './mapa';
 function App() {
   return (
     <ThemeProvider theme={theme}> 
-      <Header/>
+      {/* <Header/> */}
 
-        hola mundo
-        {/* <Drawer/>
+        {/* hola mundo */}
+        <Drawer/>
         <div>
           <Mapa/>
-        </div> */}
+        </div>
       
     </ThemeProvider> 
   );

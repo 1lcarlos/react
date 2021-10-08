@@ -17,11 +17,28 @@ const Map = () => {
     const map = new mapboxgl.Map({
       container: mapContainerRef.current,
       style: 'mapbox://styles/1lcarlos/cku36v4280dap17mkpb8bokcx',
+      // style: 'mapbox://styles/mapbox/light-v10',
       center: [lng, lat],
       zoom: zoom
     });
 
     map.on('load', () => {
+
+    //   map.addSource({
+    //     // 'id': 'wms-test-layer',
+    //     // 'type': 'raster',
+    //     // 'source': {
+    //     //     'type': 'geojson',
+    //     //     'tiles': [
+    //     //       "http://localhost:8080/geoserver/gwc/demo/calidad_aire_postgres:heatmap?gridSet=EPSG:4326&format=application/json;type=geojson"
+             
+    //     //     ],
+    //     //     // 'tileSize': 256
+    //     //     "minZoom": 0,
+    //     //     "maxZoom": 14
+    //     // },
+    //     // 'paint': {}
+    // });
         map.addSource('earthquakes', {
         type: 'geojson',
         // Use a URL for the value for the `data` property.
