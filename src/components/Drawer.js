@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import InputBase from '@material-ui/core/InputBase';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,13 +16,17 @@ import { Grid, Box } from '@material-ui/core';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
 import logoDane from "../img/DANE__Geovisor__icon__logoDANE__01.svg";
 import logoObservatorio from "../img/Logo_Observatorio_inmobiliario_Opcion1.svg";
-import { AiOutlineDownload, AiOutlineFilter, AiOutlineQuestionCircle } from "react-icons/ai";
+import { AiOutlineDownload, AiOutlineFilter, AiOutlineQuestionCircle,
+         AiOutlineSearch } from "react-icons/ai";
 import { FiLayers } from "react-icons/fi";
 import { FaSearchLocation,
          FaFolderOpen,
          FaCog } from "react-icons/fa";
+import ModalAyuda from './ui/modalAyuda';
 
 const drawerWidth = 350;
 
@@ -85,7 +90,19 @@ const useStyles = makeStyles((theme) => ({
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
+      borderRadius: 10,
+      textAlign: 'center',
     },
+    search:{
+      // marginTop: 10,
+      // marginRight:5,
+      margin: 'auto',
+      justifyContent:'flex-end',
+      border: '1px solid #8A8A8A  ',
+      borderRadius: '15px',
+      boxShadow: '0 2px 6px 0 rgba(0,0,0,0.24)',
+      transition: 'all ease-in-out 0.2s',        
+     },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -173,6 +190,11 @@ export default function PersistentDrawerLeft() {
           <Typography variant="h6" noWrap>
             Geovisor de Analisis Inmobiliario 
           </Typography>
+          <InputBase
+                            className = {classes.search}                            
+                            placeholder={'Buscar...'}
+                            startAdornment={<AiOutlineSearch />}
+                            />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -265,6 +287,7 @@ export default function PersistentDrawerLeft() {
         <Typography variant="h6" noWrap>
             Filtro
         </Typography>
+        {/* <ModalAyuda/> */}
         <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -279,7 +302,14 @@ export default function PersistentDrawerLeft() {
       >
         <Fade in={openModal}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Transition modal</h2>
+            <Typography
+                        variant ='h6'>Geovisor Analisis Inmobiliario</Typography>
+            <Tabs >
+                    <Tab label='Guia Rapida' icon= {<FaCog/>}/>
+                    <Tab label='Acerca de' />
+                    <Tab label='Contactenos' />       
+            </Tabs>
+            
             <p id="transition-modal-description">react-transition-group animates me.</p>
           </div>
         </Fade>
