@@ -17,8 +17,17 @@ const theme = createTheme({
       }      
     },
     typography:{
-      h3: {
-        fontWeight: 300
+      tab: {
+        fontFamily: 'Raleway',
+            textTransform: 'none',
+            fontWeight: 700,
+            fontSize: '1em',
+      }, 
+      cotizacion:{
+        fontFamily:'Pacifico',
+        fontSize: '1rem',
+        textTransform: 'none',
+        color:'white',
       }  
     }
   });

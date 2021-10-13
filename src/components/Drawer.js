@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
     search:{
       // marginTop: 10,
       // marginRight:5,
-      margin: 'auto',
+      marginLeft: 'auto',
       justifyContent:'flex-end',
       border: '1px solid #8A8A8A  ',
       borderRadius: '15px',
