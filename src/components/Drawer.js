@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import clsx from 'clsx';
 import InputBase from '@material-ui/core/InputBase';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -20,13 +20,19 @@ import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import logoDane from "../img/DANE__Geovisor__icon__logoDANE__01.svg";
 import logoObservatorio from "../img/Logo_Observatorio_inmobiliario_Opcion1.svg";
+import Instructivo from "../img/subregion-pdet-geovisor-ayuda-geoportal-dane.webp";
 import { AiOutlineDownload, AiOutlineFilter, AiOutlineQuestionCircle,
-         AiOutlineSearch } from "react-icons/ai";
+         AiOutlineSearch,
+         AiFillMail } from "react-icons/ai";
 import { FiLayers } from "react-icons/fi";
 import { FaSearchLocation,
          FaFolderOpen,
-         FaCog } from "react-icons/fa";
+         FaCog,
+         FaBookReader,
+         FaInfo,
+         FaUserAlt } from "react-icons/fa";
 import ModalAyuda from './ui/modalAyuda';
+import PropTypes from 'prop-types';
 
 const drawerWidth = 350;
 
@@ -53,6 +59,9 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
       height:'3em'
+  },
+  Instructivo:{
+      height:'25em'
   },
   container:{
     display: 'initial',
@@ -93,9 +102,14 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: 10,
       textAlign: 'center',
     },
-    search:{
-      // marginTop: 10,
-      // marginRight:5,
+    contenedorParrafo:{
+      width: 500,
+    },
+    logoModal:{
+        margin: 'auto',
+        // paddingTop: '2em',
+    },
+    search:{      
       marginLeft: 'auto',
       justifyContent:'flex-end',
       border: '1px solid #8A8A8A  ',
@@ -166,6 +180,47 @@ export default function PersistentDrawerLeft() {
     setOpenModal(false);
   };
 
+
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+  
+        return (
+          <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+          >
+            {value === index && (
+              <Box p={3}>
+                <Typography>{children}</Typography>
+              </Box>
+            )}
+          </div>
+        );
+      }
+      
+      TabPanel.propTypes = {
+        children: PropTypes.node,
+        index: PropTypes.any.isRequired,
+        value: PropTypes.any.isRequired,
+      };
+      
+    function a11yProps(index) {
+      return {
+          id: `simple-tab-${index}`,
+          'aria-controls': `simple-tabpanel-${index}`,
+        };
+      }
+      
+
+  
+  const [value, setValue] = useState(0);
+  const handleChange = (e, value) => {
+      setValue(value);
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -219,29 +274,6 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </div>
         <Divider />
-
-        {/* <ButtonGroup>
-                <Button variant="text" 
-                startIcon = {<AiOutlineQuestionCircle/>}
-                color="default"> Ayuda
-                  
-                </Button>
-                <Button variant="text" 
-                startIcon = {<AiOutlineFilter/>}
-                color="default"> consulta
-                  
-                </Button>
-                <Button variant="text" 
-                startIcon = {<FiLayers/>}
-                color="default">
-                  mapa base
-                </Button>
-                <Button variant="text" 
-                startIcon = {<AiOutlineDownload/>}
-                color="default">
-                  descarga
-                </Button>
-        </ButtonGroup> */}
         <Box padding = {2}>
 
         <Grid container 
@@ -283,10 +315,7 @@ export default function PersistentDrawerLeft() {
                 </Grid>
         </Grid>
         </Box>
-        <Divider />
-        <Typography variant="h6" noWrap>
-            Filtro
-        </Typography>
+        
         {/* <ModalAyuda/> */}
         <Modal
         aria-labelledby="transition-modal-title"
@@ -303,22 +332,30 @@ export default function PersistentDrawerLeft() {
         <Fade in={openModal}>
           <div className={classes.paper}>
             <Typography
-                        variant ='h6'>Geovisor Analisis Inmobiliario</Typography>
-            <Tabs >
-                    <Tab label='Guia Rapida' icon= {<FaCog/>}/>
-                    <Tab label='Acerca de' />
-                    <Tab label='Contactenos' />       
+                        variant ='h6'>Geovisor Análisis Inmobiliario</Typography>
+            <Tabs value={value} onChange={handleChange} >
+                    <Tab label='Guía Rápida' icon= {<FaBookReader/>} {...a11yProps(0)} />
+                    <Tab label='Acerca de' icon= {<FaInfo/>} {...a11yProps(1)} />
+                    <Tab label='Contacténos' icon= {<FaUserAlt/>} {...a11yProps(2)} />       
             </Tabs>
+            <TabPanel value={value} index={0}>
+                <img className={classes.Instructivo} src= {Instructivo} alt= 'Instructivo geovisor' />
+            </TabPanel>
+            <TabPanel className={classes.contenedorParrafo} value={value} index={1}>
+              <Typography align='left' variant="body1" color="initial">Geovisor de Análisis Inmobiliario: Herramienta de consulta y visualización de la información sociodemográfica del DANE correspondiente Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, </Typography>
+            </TabPanel>
+            <TabPanel className={classes.contenedorParrafo} value={value} index={2}>
+              <Typography align='left'  variant="body1" color="initial">Envíe su consulta por correo electrónico o tramite su petición, queja, reclamo, sugerencia o denuncia en el formulario DANE. </Typography>
+             
+            {/* <Typography align='left' style={{display: 'block'}}> <MenuIcon className={classes.logoModal}/>  Ventanilla única de PQRSD, aquí.</Typography>
+            <Typography align='left' style={{display: 'block'}}><AiFillMail /> contacto@dane.gov.co</Typography>  */}
             
-            <p id="transition-modal-description">react-transition-group animates me.</p>
+            <Tab label="Ventanilla única de PQRSD, aquí." icon={<MenuIcon />}/>
+            <Tab label="contacto@dane.gov.co" icon={<AiFillMail />}/>
+            </TabPanel> 
           </div>
         </Fade>
-      </Modal>
-            <Box padding = {5} ></Box>
-            <Divider />
-        <Typography variant="h6" noWrap>
-            Capas
-          </Typography>       
+      </Modal>                
       </Drawer>
       <main
         className={clsx(classes.content, {
