@@ -33,6 +33,10 @@ import { FaSearchLocation,
          FaUserAlt } from "react-icons/fa";
 import ModalAyuda from './ui/modalAyuda';
 import PropTypes from 'prop-types';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 const drawerWidth = 350;
 
@@ -63,6 +67,15 @@ const useStyles = makeStyles((theme) => ({
   Instructivo:{
       height:'25em'
   },
+  contenedorSubMenu:{
+    marginTop:'8px',
+    paddingLeft:1,
+    paddingRight:1,
+    minWidth: '85px', 
+    fontSize: '12px',
+    textTransform: 'none',
+    fontFamily: 'Roboto',
+  },
   container:{
     display: 'initial',
     textAlign: 'center',
@@ -89,12 +102,25 @@ const useStyles = makeStyles((theme) => ({
       boxShadow:' 0 0 0 10px #666'
      }
   },
-      modal: {
+formControl: {
+    margin: theme.spacing(1),
+    minWidth: '18em',
+    borderRadius:'50%',
+  },
+select: {    
+    borderRadius:5,
+    height: 50,
+    fontSize: '10px',
+    borderBotton:'none',
+    backgroundColor: '#fff',
+    border: '1px solid #000',
+},
+modal: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
     },
-    paper: {
+paper: {
       backgroundColor: theme.palette.background.paper,
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
@@ -215,10 +241,23 @@ export default function PersistentDrawerLeft() {
       }
       
 
-  
+  //State del menu modal
   const [value, setValue] = useState(0);
   const handleChange = (e, value) => {
       setValue(value);
+  };
+  //---fin state modal
+
+  //  State del menu drawer
+  const [values, setValues] = useState(2);
+  const handleChanges = (e, value) => {
+      setValues(value);
+  };
+  //---fin state menu drawer
+
+  const [age, setAge] = React.useState('');
+  const handleChanger = (event) => {
+    setAge(event.target.value);
   };
 
   return (
@@ -245,11 +284,11 @@ export default function PersistentDrawerLeft() {
           <Typography variant="h6" noWrap>
             Geovisor de Analisis Inmobiliario 
           </Typography>
-          <InputBase
+          {/* <InputBase
                             className = {classes.search}                            
                             placeholder={'Buscar...'}
                             startAdornment={<AiOutlineSearch />}
-                            />
+                            /> */}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -274,7 +313,46 @@ export default function PersistentDrawerLeft() {
           </IconButton>
         </div>
         <Divider />
-        <Box padding = {2}>
+
+        <Tabs value={values} onChange={handleChanges} >
+                    <Tab className={classes.contenedorSubMenu} onClick={handleOpen} label='Ayuda' icon= {<AiOutlineQuestionCircle 
+                        
+                        className={classes.icono} fontSize = {20} />} {...a11yProps(0)} />
+                    <Tab className={classes.contenedorSubMenu} label='Ubicación' icon= {<FaSearchLocation className={classes.icono} fontSize = {20} />} {...a11yProps(4)} />
+                    <Tab className={classes.contenedorSubMenu} label='Temas' icon= {<FaFolderOpen className={classes.icono} fontSize = {20} />} {...a11yProps(1)} />       
+                    <Tab className={classes.contenedorSubMenu} label='Herramientas' icon= {<FaCog className={classes.icono} fontSize = {20}/>} {...a11yProps(2)} />       
+        </Tabs>       
+        <TabPanel value={values} index={1}>            
+              <Typography variant="body1" color="initial">Realice la selección geográfica que desea ver en el mapa</Typography>
+              <FormControl variant="filled" className={classes.formControl} >
+                <InputLabel id="demo-simple-select-filled-label">Departamento </InputLabel>
+                <Select
+                  
+                  color= 'primary'
+                  className={classes.select}
+                  labelId="demo-simple-select-filled-label"
+                  id="demo-simple-select-filled"
+                  value={age}
+                  onChange={handleChanger}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+        </TabPanel>
+        <TabPanel  value={values} index={2}>
+              <Typography align='left'  variant="body1" color="initial">Envíe su consulta por correo electrónico o tramite su petición, queja, reclamo, sugerencia o denuncia en el formulario DANE. </Typography>  
+            
+        </TabPanel> 
+        <TabPanel  value={values} index={3}>
+              <Typography align='left'  variant="body1" color="initial">Envíe su consulta por correo electrónico o tramite su petición, queja, reclamo, sugerencia o denuncia en el formulario DANE. </Typography>  
+            
+        </TabPanel> 
+        {/* <Box padding = {2}>
 
         <Grid container 
                     color = "error"
@@ -314,7 +392,7 @@ export default function PersistentDrawerLeft() {
                     </Typography>    
                 </Grid>
         </Grid>
-        </Box>
+        </Box> */}
         
         {/* <ModalAyuda/> */}
         <Modal
